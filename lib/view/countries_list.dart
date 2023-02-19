@@ -1,4 +1,5 @@
 import 'package:covid_tracker/Service/stats_services.dart';
+import 'package:covid_tracker/view/details_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
@@ -28,9 +29,7 @@ class _CountriesRecordsScreenState extends State<CountriesRecordsScreen> {
               child: TextFormField(
                 controller: searchController,
                 onChanged: ((value) {
-                  setState(() {
-
-                  });
+                  setState(() {});
                 }),
                 decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(horizontal: 20),
@@ -69,7 +68,7 @@ class _CountriesRecordsScreenState extends State<CountriesRecordsScreen> {
                                   width: 50,
                                   color: Colors.white,
                                 ),
-                              )
+                              ),
                             ],
                           ),
                         );
@@ -82,15 +81,24 @@ class _CountriesRecordsScreenState extends State<CountriesRecordsScreen> {
                         if (searchController.text.isEmpty) {
                           return Column(
                             children: [
-                              ListTile(
-                                title: Text(snapshot.data![index]['country']),
-                                subtitle: Text(
-                                    snapshot.data![index]['cases'].toString()),
-                                leading: Image(
-                                  height: 50,
-                                  width: 50,
-                                  image: NetworkImage(snapshot.data![index]
-                                      ['countryInfo']['flag']),
+                              InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => DetailsScreen(
+                                              data: snapshot.data![index])));
+                                },
+                                child: ListTile(
+                                  title: Text(snapshot.data![index]['country']),
+                                  subtitle: Text(snapshot.data![index]['cases']
+                                      .toString()),
+                                  leading: Image(
+                                    height: 50,
+                                    width: 50,
+                                    image: NetworkImage(snapshot.data![index]
+                                        ['countryInfo']['flag']),
+                                  ),
                                 ),
                               ),
                             ],
@@ -100,17 +108,26 @@ class _CountriesRecordsScreenState extends State<CountriesRecordsScreen> {
                             .contains(searchController.text)) {
                           return Column(
                             children: [
-                              ListTile(
-                                title: Text(snapshot.data![index]['country']),
-                                subtitle: Text(
-                                    snapshot.data![index]['cases'].toString()),
-                                leading: Image(
-                                  height: 50,
-                                  width: 50,
-                                  image: NetworkImage(snapshot.data![index]
-                                      ['countryInfo']['flag']),
+                              InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => DetailsScreen(
+                                              data: snapshot.data![index])));
+                                },
+                                child: ListTile(
+                                  title: Text(snapshot.data![index]['country']),
+                                  subtitle: Text(snapshot.data![index]['cases']
+                                      .toString()),
+                                  leading: Image(
+                                    height: 50,
+                                    width: 50,
+                                    image: NetworkImage(snapshot.data![index]
+                                        ['countryInfo']['flag']),
+                                  ),
                                 ),
-                              ),
+                              )
                             ],
                           );
                         } else {
